@@ -3,3 +3,5 @@ wordcloud
 pycountry
 seaborn==0.12.2
 scipy
+sklearn
+scikit-learn
