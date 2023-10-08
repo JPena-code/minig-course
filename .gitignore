@@ -1,3 +1,7 @@
+# Image directory
+images/
+*.png
+
 # Data Sources
 *.csv
 *.xlsx
