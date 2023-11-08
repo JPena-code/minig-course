@@ -2,8 +2,15 @@
 pandas
 
 plotly
+nbformat>=4.2.0
+
 pycountry
 
 seaborn==0.12.2
 
+mlxtend
 scikit-learn
+
+# Jupyter Kernel support in env
+ipykernel
+ipywidgets
