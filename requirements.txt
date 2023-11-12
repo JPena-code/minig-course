@@ -1,5 +1,5 @@
 # Required packages and versions
-pandas == 2.1.2
+pandas==2.1.2
 
 plotly
 nbformat>=4.2.0
