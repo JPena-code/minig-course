@@ -4,10 +4,10 @@
     "cpus": 4
   },
   "waitFor": "onCreateCommand",
-  "onCreateCommand": "python3 -m venv --prompt ./.env && source ./.env/bin/activate",
-  "postCreateCommand": "python3 -m pip install -r requirements.txt",
+  "onCreateCommand": "python -m venv --copies --prompt container ./.env && source ./.env/bin/activate",
+  "postCreateCommand": "python -m pip install -r requirements.txt",
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:2":{
+    "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": "true",
       "username": "vscode",
       "userUid": "1000",
@@ -15,10 +15,12 @@
       "upgradePackages": "true"
     }
   },
-  "vscode": {
-    "extensions": [
-      "ms-toolsai.jupyter",
-      "ms-python.python"
-    ]
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-toolsai.jupyter",
+        "ms-python.python"
+      ]
+    }
   }
 }
