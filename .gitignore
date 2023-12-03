@@ -5,7 +5,7 @@
 images/
 *.png
 
-# Data Sources
+# Data Sources not compressed
 *.csv
 *.xlsx
 
