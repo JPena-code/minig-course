@@ -1,4 +1,4 @@
-from .functions import (
+from ._functions import (
     country_conversion,
     rules_display,
     items_sets_display,
@@ -7,5 +7,7 @@ from .functions import (
     heatmap_country,
     scatter_pca,
     variance_columns,
-    scatter_rules
+    scatter_rules,
+    eval_metrics,
+    make_roc_curve,
 )

@@ -1,4 +1,3 @@
-import pandas as pd
 from pandas import CategoricalDtype
 
 # Setting values of categorical attribute
@@ -28,8 +27,8 @@ AGE_CATE = [
 ]
 # Categorical objects attributes
 CATEGORICAL_COLUMNS = [
-    'ageBroad',
     'gender',
+    'ageBroad',
     'majorityStatus',
     'majorityStatusAtExploit',
     'majorityEntry',

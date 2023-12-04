@@ -1,12 +1,21 @@
 from zipfile import ZipFile
 
 import pycountry
+import numpy as np
 import pandas as pd
 
 import plotly.io as pio
 import plotly.express as px
 
+from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_selection import VarianceThreshold
+from sklearn.metrics import (
+    precision_recall_fscore_support,
+    accuracy_score,
+    RocCurveDisplay,
+    roc_auc_score,
+    roc_curve,
+)
 
 from .constants import (
     AGE_CATE,
@@ -280,3 +289,36 @@ def scatter_rules(rules: pd.DataFrame, title):
     )
 
     return rules_plot
+
+
+# Function to retrieve the performance evaluation metrics for
+# the predictions of a classification model
+def eval_metrics(predict: np.ndarray, real: np.ndarray):
+    if predict.shape[0] != real.shape[0]:
+        raise ValueError(f'Prediction and real class must have same dim, instead got {predict.shape} {real.shape}')
+    metrics = precision_recall_fscore_support(
+        real,
+        predict,
+        average='macro',
+        zero_division=np.nan)[:-1]
+    return dict(
+        zip(('f_score', 'precision', 'recall'), metrics), accuracy=accuracy_score(real, predict))
+
+
+# Function to generate plot of ROC curve
+def make_roc_curve(
+        predict: np.ndarray,
+        real: np.ndarray,
+        pos_label: str,
+        estimator_name):
+    encoder = LabelEncoder().fit(real)
+    label_position = encoder.transform([pos_label])[0]
+    y_real = encoder.transform(real)
+    fpr, tpr, _ = roc_curve(
+        y_real,
+        predict[:, label_position],
+        pos_label=label_position)
+    auc = roc_auc_score(y_real, predict[:, label_position], average='micro', multi_class='ovr')
+    return RocCurveDisplay(
+        fpr=fpr, tpr=tpr, roc_auc=auc,
+        estimator_name=estimator_name)
